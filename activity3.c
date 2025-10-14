@@ -1,3 +1,8 @@
+/* 
+*      YOUR NAME: Tyler Ebner
+*      YOUR RECITATION TIME: Tuesday 2:00 PM
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -50,16 +55,47 @@ void  delete (node **head)
 *          of the student
 *  If no record is found print No Match  
 */
-void search (node *head)
+void search_age (node *head)
 {
-    int  age;   // user inputted id no to search for
-    node  *curr; 
+    int age;   // user inputted age no to search for
+    node *curr; 
+    printf("Input Age for Search: ");
+    scanf("%d", &age);
+    curr = head;
+    int flag = 0;
     
-   
-   /*  COMPLETE  */
- 
- 
- 
+    while (curr !=NULL) {	
+	if (curr->age == age) {
+		printf ("\nId: %d \tName: %s \tAge: %d", 
+		curr->id, curr->name, curr->age);
+		flag = 1;
+	}
+	curr = curr->next;
+	}
+    if (flag == 0) {
+    	printf("No Match");	
+    }
+} 
+
+void search_id (node *head)
+{
+    int id;   // user inputted id no to search for
+    node *curr; 
+    printf("Input ID for Search: ");
+    scanf("%d", &id);
+    curr = head;
+    
+    while (curr !=NULL) {	
+	if (curr->id == id) {
+		printf ("\nId: %d \tName: %s \tAge: %d", 
+		curr->id, curr->name, curr->age);
+		return;
+	} else if (curr->id > id){
+		break;
+	}
+	curr = curr->next;
+	}
+    	printf("No Match");	
 } 
 
 /* Insert a new student record ordered by Id */
@@ -164,8 +200,9 @@ void displayMenu() {
     printf("| 1. Insert a new record      |\n");
     printf("| 2. Delete a record          |\n");
     printf("| 3. Search for record by age |\n");
-	printf("| 4. Display all records      |\n");
-    printf("| 5. Exit                     |\n");
+    printf("| 4. Search for record by ID  |\n");
+	printf("| 5. Display all records      |\n");
+    printf("| 6. Exit                     |\n");
 	printf("-------------------------------\n");
     printf("Enter your choice: ");
 }
@@ -191,13 +228,17 @@ int main() {
                 break;
 
             case 3:
-				/* COMPLETE */
+				search_age(head);
+		break;
+	    case 4:
+				search_id(head);
+		break;
 
-            case 4:
+            case 5:
 				display(head);
                 break;
 				
-            case 5:
+            case 6:
                 printf("Exiting the program.\n");
                 return 0;
 
